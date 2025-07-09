@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Postres Dulces</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-pink-100 text-gray-800">
+    <div class="container min-h-screen flex flex-col items-center py-8">
+        <!-- Header -->
+        <header class="w-full bg-white p-6 rounded-xl shadow-lg mb-8 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-4xl font-bold text-pink-600 mb-4 md:mb-0">🍰 Dulce Gestión de Postres 🍰</h1>
+            <nav class="flex flex-wrap gap-4">
+                <button id="nav-login" class="btn-primary">Iniciar Sesión</button>
+                <button id="nav-register" class="btn-primary">Registrarse</button>
+                <button id="nav-desserts" class="btn-primary">Ver Postres</button>
+                <button id="nav-create-dessert" class="btn-primary hidden">Crear Postre</button>
+                <span id="user-info" class="text-lg font-semibold text-pink-700 hidden"></span>
+                <button id="nav-logout" class="btn-primary hidden">Cerrar Sesión</button>
+            </nav>
+        </header>
+
+        <!-- Message Box -->
+        <div id="message-box" class="message-box"></div>
+
+        <!-- Login Section -->
+        <section id="login-section" class="w-full max-w-md card hidden">
+            <h2 class="text-3xl font-semibold text-center text-pink-600 mb-6">Iniciar Sesión</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="login-email" class="form-label block mb-2">Correo Electrónico:</label>
+                    <input type="email" id="login-email" class="input-field" required>
+                </div>
+                <div>
+                    <label for="login-password" class="form-label block mb-2">Contraseña:</label>
+                    <input type="password" id="login-password" class="input-field" required>
+                </div>
+                <button type="submit" class="btn-primary w-full">Entrar</button>
+            </form>
+        </section>
+
+        <!-- Register Section -->
+        <section id="register-section" class="w-full max-w-md card hidden">
+            <h2 class="text-3xl font-semibold text-center text-pink-600 mb-6">Registrarse</h2>
+            <form id="register-form" class="space-y-4">
+                <div>
+                    <label for="register-name" class="form-label block mb-2">Nombre:</label>
+                    <input type="text" id="register-name" class="input-field" required>
+                </div>
+                <div>
+                    <label for="register-email" class="form-label block mb-2">Correo Electrónico:</label>
+                    <input type="email" id="register-email" class="input-field" required>
+                </div>
+                <div>
+                    <label for="register-password" class="form-label block mb-2">Contraseña:</label>
+                    <input type="password" id="register-password" class="input-field" required>
+                </div>
+                <button type="submit" class="btn-primary w-full">Crear Cuenta</button>
+            </form>
+        </section>
+
+        <!-- Desserts List Section -->
+        <section id="desserts-list-section" class="w-full hidden">
+            <h2 class="text-3xl font-semibold text-center text-pink-600 mb-6">Nuestros Deliciosos Postres</h2>
+            <div id="desserts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Desserts will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Dessert Detail Section -->
+        <section id="dessert-detail-section" class="w-full max-w-2xl card hidden">
+            <h2 class="text-3xl font-semibold text-center text-pink-600 mb-6">Detalles del Postre</h2>
+            <div id="dessert-detail-content" class="space-y-4">
+                <!-- Dessert details will be loaded here -->
+            </div>
+            <div class="mt-6 flex justify-end gap-4">
+                <button id="edit-dessert-btn" class="btn-secondary hidden">Editar</button>
+                <button id="delete-dessert-btn" class="btn-secondary hidden">Eliminar</button>
+                <button id="back-to-list-btn" class="btn-primary">Volver a la Lista</button>
+            </div>
+        </section>
+
+        <!-- Create/Update Dessert Section -->
+        <section id="dessert-form-section" class="w-full max-w-md card hidden">
+            <h2 id="dessert-form-title" class="text-3xl font-semibold text-center text-pink-600 mb-6">Crear Nuevo Postre</h2>
+            <form id="dessert-form" class="space-y-4">
+                <input type="hidden" id="dessert-id">
+                <div>
+                    <label for="dessert-name" class="form-label block mb-2">Nombre:</label>
+                    <input type="text" id="dessert-name" class="input-field" required>
+                </div>
+                <div>
+                    <label for="dessert-price" class="form-label block mb-2">Precio:</label>
+                    <input type="number" id="dessert-price" class="input-field" step="0.01" required>
+                </div>
+                <div>
+                    <label for="dessert-description" class="form-label block mb-2">Descripción:</label>
+                    <textarea id="dessert-description" class="input-field" rows="4"></textarea>
+                </div>
+                <div>
+                    <label for="dessert-stock" class="form-label block mb-2">Stock:</label>
+                    <input type="number" id="dessert-stock" class="input-field" required>
+                </div>
+                <div>
+                    <label for="dessert-image" class="form-label block mb-2">URL de la imagen:</label>
+                    <input type="text" id="dessert-image" class="input-field" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                <button type="submit" class="btn-primary w-full">Guardar Postre</button>
+                <button type="button" id="cancel-dessert-form" class="btn-secondary w-full mt-2">Cancelar</button>
+            </form>
+        </section>
+    </div>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
